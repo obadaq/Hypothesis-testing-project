@@ -5,7 +5,7 @@
 
 # First : Prepere the data set
 
-titanic.df <- read.csv('titanic3.csv')
+titanic.df <- read.csv('titanic.csv')
 
 
 # Analayzing sub-groubs of the data frame and visualize results
@@ -16,17 +16,17 @@ age.su <- data.frame(titanic.df$Age,titanic.df$Survived)
 su10 <- subset(age.su,age.su$titanic.df.Survived==0)
 su11 <- subset(age.su,age.su$titanic.df.Survived==1)
 
-boxplot(su0$titanic.df.Age,su1$titanic.df.Age,main='Not - Survived                       Survived')
-hist(su0$titanic.df.Age,main = 'histogram of Age - Not Survived',xlab = 'Age')
-hist(su1$titanic.df.Age,main = 'histogram of Age - Not Survived',xlab = 'Age')
+boxplot(su10$titanic.df.Age,su11$titanic.df.Age,main='Not - Survived                       Survived')
+hist(su10$titanic.df.Age,main = 'histogram of Age - Not Survived',xlab = 'Age')
+hist(su11$titanic.df.Age,main = 'histogram of Age - Not Survived',xlab = 'Age')
 
 
 
 # test normality the two sub-sets
 library(nortest)
 
-shapiro.test(su0$titanic.df.Age)
-shapiro.test(su1$titanic.df.Age)
+shapiro.test(su10$titanic.df.Age)
+shapiro.test(su11$titanic.df.Age)
 
 # sub-group 2 : relationship b\w gender and survival taking the age into account
 

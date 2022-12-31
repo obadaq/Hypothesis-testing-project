@@ -3,10 +3,9 @@
 # The Data set used is "Titanic Data set"
 # The objective is to test 3 different hypothesis with 3 different tests
 
+
 # First : Prepere the data set
-
 titanic.df <- read.csv('titanic3.csv')
-
 
 # Analayzing sub-groubs of the data frame and visualize results
 
@@ -16,14 +15,9 @@ age.su <- data.frame(titanic.df$age,titanic.df$survived)
 su10 <- subset(age.su,age.su$titanic.df.survived==0)
 su11 <- subset(age.su,age.su$titanic.df.survived==1)
 
-#library(BSDA)
-
-#z.test(su10, su11, alternative='two.sided', sigma.x=2,mu=0, sigma.y=10,conf.level=.95)
-
 boxplot(su10$titanic.df.age,su11$titanic.df.age,main='Not - Survived                       Survived')
-hist(su10$titanic.df.age,main = 'histogram of Age - Not Survived',xlab = 'Age')
-hist(su11$titanic.df.age,main = 'histogram of Age - Not Survived',xlab = 'Age')
-
+hist(su10$titanic.df.age,main = 'Histogram of Age - Not Survived',xlab = 'Age')
+hist(su11$titanic.df.age,main = 'Histogram of Age - Survived',xlab = 'Age')
 
 
 # test normality the two sub-sets
@@ -39,7 +33,7 @@ su20 <- subset(gender.su,gender.su$titanic.df.survived==0)
 su21 <- subset(gender.su,gender.su$titanic.df.survived==1)
 
 barplot(table(su20$titanic.df.sex),main='Barplot for Not Survived people',ylab='Number of people')
-barplot(table(su21$titanic.df.sex),main='Barplot for Not Survived people',ylab='Number of people')
+barplot(table(su21$titanic.df.sex),main='Barplot for Survived people',ylab='Number of people')
 
 
 msu0 <- subset(su20,su20$titanic.df.sex=='male')
@@ -60,7 +54,7 @@ shapiro.test(fsu0$titanic.df.age)
 shapiro.test(fsu1$titanic.df.age)
 
 
-# sub-group 3 : relationship b\w age and survival taking the age into account
+# sub-group 3 : relationship b\w age and survival taking the gender into account
 
 su31 <- su11
 su30 <- su10
@@ -76,7 +70,7 @@ x <- x[-2]
 y <- y[-2]
 
 AgTable <- cbind(x,y$Freq)
-names(AgTable)[names(AgTable) == "asuc1"] <- "def"
+names(AgTable)[names(AgTable) == "su31"] <- "def"
 names(AgTable)[names(AgTable) == "Freq"] <- "Survived"
 names(AgTable)[names(AgTable) == "y$Freq"] <- "Un-Survived"
 rownames(AgTable)<-c("Young","Young Adult","Adult","Old")
