@@ -1,0 +1,20 @@
+?prop.test
+starting httpd help server ... done
+x <- c(21, 48)
+n <- c(150, 200)
+prop.test(x, n)
+
+prop.test(12, 40, 0.3)
+
+prop.test(x =c(21,48), n=c(150,200), p=c(0.1, 0.20))
+
+
+DataMon <- read.csv("Dataa.txt", sep=",", header= T)
+reg <- lm(SBP ~ AGE, data = DataMon)
+
+summary(reg)
+
+reg2 <- lm(SBP ~ AGE + QUET, data = DataMon)
+
+summary(reg2)
+

@@ -26,6 +26,8 @@ library(nortest)
 shapiro.test(su10$titanic.df.age)
 shapiro.test(su11$titanic.df.age)
 
+wilcox.test(su10$titanic.df.age,su11$titanic.df.age)
+
 # sub-group 2 : relationship b\w gender and survival taking the age into account
 
 gender.su <- data.frame(titanic.df$sex,titanic.df$age,titanic.df$survived)
@@ -80,14 +82,82 @@ AgTable
 temp <- AgTable$Survived
 names(temp)<-c("young","young adult","Adult","old")
 barplot(temp,main = 'Survived')
-
 boxplot(temp, main='Boxplot for Survived')
 
 temp<-AgTable$`Un-Survived`
 names(temp)<-c("young","young adult","Adult","old")
 barplot(temp,main='Un-Survived')
-
 boxplot(temp, main='Boxplot for Not-Survived')
 
 AgTable<-AgTable[,-1]
 chisq.test(AgTable)
+
+
+# sub-group 4 : relationship b\w survival and gender
+
+gen <- data.frame(titanic.df$sex,titanic.df$survived)
+su40 <- subset(gen,gen$titanic.df.survived==0)
+su41 <- subset(gen,gen$titanic.df.survived==1)
+
+su40<-data.frame(t(t(table(su40$titanic.df.sex))))
+su41<-data.frame(t(t(table(su41$titanic.df.sex))))
+
+
+su40<-su40[-2]
+su40<-su40[-1]
+su41<-su41[-2]
+su41<-su41[-1]
+GenderTable<-cbind(su40,su41$Freq)
+rownames(GenderTable)<-c("Female","Male")
+colnames(GenderTable)<-c("Survived","Not-Survived")
+
+GenderTable
+
+temp<-GenderTable$Survived
+names(temp)<-c("Female","Male")
+barplot(temp,main = "Survived")
+
+temp<-GenderTable$`Not-Survived`
+names(temp)<-c("Female","Male")
+barplot(temp,main = "Not-Survived")
+
+# sub-group 5 : relationship b\w survival and Pclass
+temp<-subset(titanic.df,titanic.df$survived==0)
+temp<-subset(temp,temp$pclass==1)
+class1n<-data.frame(temp$pclass,temp$survived)
+
+temp<-subset(titanic.df,titanic.df$survived==1)
+temp<-subset(temp,temp$pclass==1)
+class1s<-data.frame(temp$pclass,temp$survived)
+
+temp<-subset(titanic.df,titanic.df$survived==0)
+temp<-subset(temp,temp$pclass==2)
+class2n<-data.frame(temp$pclass,temp$survived)
+
+temp<-subset(titanic.df,titanic.df$survived==1)
+temp<-subset(temp,temp$pclass==2)
+class2s<-data.frame(temp$pclass,temp$survived)
+
+temp<-subset(titanic.df,titanic.df$survived==0)
+temp<-subset(temp,temp$pclass==3)
+class3n<-data.frame(temp$pclass,temp$survived)
+
+temp<-subset(titanic.df,titanic.df$survived==1)
+temp<-subset(temp,temp$pclass==3)
+class3s<-data.frame(temp$pclass,temp$survived)
+
+class1s<-table(class1s)
+class1n<-table(class1n)
+class2s<-table(class2s)
+class2n<-table(class2n)
+class3n<-table(class3n)
+class3s<-table(class3s)
+
+ClassTable<-matrix(c(class1s[-2:-3],class1n[-2:-3],class2s[1],class2n[1],class3s[1],class3n[1]),ncol=2,byrow=TRUE)
+rownames(ClassTable)<-c("Class-1","Class-2","Class-3")
+colnames(ClassTable)<-c("Survived","Un-Survived")
+ClassTable
+barplot(ClassTable)
+library("nptest")
+np.loc.test(ClassTable)
+

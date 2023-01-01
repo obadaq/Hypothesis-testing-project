@@ -3,9 +3,9 @@
     "path": "C:/Users/engob/Desktop/Hypothesis testing project/HyT.R",
     "project_path": "HyT.R",
     "type": "r_source",
-    "hash": "0",
+    "hash": "4185422207",
     "contents": "",
-    "dirty": true,
+    "dirty": false,
     "created": 1672475161575.0,
     "source_on_save": false,
     "relative_order": 1,
@@ -17,11 +17,11 @@
         "scrollLine": "4"
     },
     "folds": "",
-    "lastKnownWriteTime": 1672482598,
+    "lastKnownWriteTime": 1672599335,
     "encoding": "UTF-8",
     "collab_server": "",
     "source_window": "",
-    "last_content_update": 1672504591124,
+    "last_content_update": 1672599335843,
     "read_only": false,
     "read_only_alternatives": []
 }
